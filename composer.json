@@ -1,0 +1,25 @@
+{
+  "name": "borsch/router",
+  "description": "A routing library.",
+  "minimum-stability": "dev",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Alexandre DEBUSSCHERE",
+      "email": "zizilex@gmail.com"
+    }
+  ],
+  "require": {
+    "psr/http-message": "1.0.1",
+    "psr/http-server-middleware": "1.0.1",
+    "league/uri": "6.2.1"
+  },
+  "require-dev": {
+    "laminas/laminas-diactoros": "2.2.2"
+  },
+  "autoload": {
+    "psr-4": {
+      "Borsch\\Router\\": "src/"
+    }
+  }
+}
