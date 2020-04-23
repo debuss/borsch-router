@@ -51,7 +51,7 @@ class RouteResult implements RouteResultInterface
      * @param array|null $methods
      * @return RouteResultInterface
      */
-    public static function fromRouteFailure(?array $methods): RouteResultInterface
+    public static function fromRouteFailure(?array $methods = null): RouteResultInterface
     {
         $result = new self();
         $result->success = false;
@@ -69,7 +69,7 @@ class RouteResult implements RouteResultInterface
     }
 
     /**
-     * @return bool|Route
+     * @return false|Route
      */
     public function getMatchedRoute()
     {
@@ -106,7 +106,7 @@ class RouteResult implements RouteResultInterface
      */
     public function isMethodFailure() : bool
     {
-        if (is_array($this->methods)) {
+        if ($this->isFailure() && is_array($this->methods)) {
             return true;
         }
 
@@ -126,6 +126,10 @@ class RouteResult implements RouteResultInterface
      */
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
+        foreach ($this->params as $key => $value) {
+            $request = $request->withAttribute($key, $value);
+        }
+
         if ($this->success) {
             return $this->route->getMiddleware()->process($request, $handler);
         }

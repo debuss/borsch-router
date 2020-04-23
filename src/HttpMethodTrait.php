@@ -18,7 +18,7 @@ trait HttpMethodTrait
      * @param MiddlewareInterface|callable $middleware
      * @param string|null $name
      */
-    public function get(string $path, $middleware, ?string $name): void
+    public function get(string $path, $middleware, ?string $name = null): void
     {
         $this->addRoute(new Route($path, $middleware, [strtoupper(__FUNCTION__)], $name));
     }
@@ -28,7 +28,7 @@ trait HttpMethodTrait
      * @param MiddlewareInterface|callable$middleware
      * @param string|null $name
      */
-    public function post(string $path, $middleware, ?string $name): void
+    public function post(string $path, $middleware, ?string $name = null): void
     {
         $this->addRoute(new Route($path, $middleware, [strtoupper(__FUNCTION__)], $name));
     }
@@ -38,7 +38,7 @@ trait HttpMethodTrait
      * @param MiddlewareInterface|callable$middleware
      * @param string|null $name
      */
-    public function put(string $path, $middleware, ?string $name): void
+    public function put(string $path, $middleware, ?string $name = null): void
     {
         $this->addRoute(new Route($path, $middleware, [strtoupper(__FUNCTION__)], $name));
     }
@@ -48,7 +48,7 @@ trait HttpMethodTrait
      * @param MiddlewareInterface|callable$middleware
      * @param string|null $name
      */
-    public function delete(string $path, $middleware, ?string $name): void
+    public function delete(string $path, $middleware, ?string $name = null): void
     {
         $this->addRoute(new Route($path, $middleware, [strtoupper(__FUNCTION__)], $name));
     }
@@ -58,7 +58,7 @@ trait HttpMethodTrait
      * @param MiddlewareInterface|callable$middleware
      * @param string|null $name
      */
-    public function patch(string $path, $middleware, ?string $name): void
+    public function patch(string $path, $middleware, ?string $name = null): void
     {
         $this->addRoute(new Route($path, $middleware, [strtoupper(__FUNCTION__)], $name));
     }
@@ -68,7 +68,7 @@ trait HttpMethodTrait
      * @param MiddlewareInterface|callable$middleware
      * @param string|null $name
      */
-    public function head(string $path, $middleware, ?string $name): void
+    public function head(string $path, $middleware, ?string $name = null): void
     {
         $this->addRoute(new Route($path, $middleware, [strtoupper(__FUNCTION__)], $name));
     }
@@ -78,7 +78,7 @@ trait HttpMethodTrait
      * @param MiddlewareInterface|callable$middleware
      * @param string|null $name
      */
-    public function options(string $path, $middleware, ?string $name): void
+    public function options(string $path, $middleware, ?string $name = null): void
     {
         $this->addRoute(new Route($path, $middleware, [strtoupper(__FUNCTION__)], $name));
     }

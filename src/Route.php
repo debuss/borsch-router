@@ -41,7 +41,9 @@ class Route implements RouteInterface
     public function __construct(string $path, callable $middleware, ?array $methods, ?string $name = null)
     {
         $this->path = $path;
-        $this->middleware = $middleware;
+        $this->middleware = $middleware instanceof MiddlewareInterface ?
+            $middleware :
+            new CallableMiddleware($middleware);
         $this->methods = $methods ?: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'HEAD', 'OPTIONS'];
         $this->name = $name;
     }
@@ -51,7 +53,7 @@ class Route implements RouteInterface
      */
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
-        return call_user_func($this->middleware, $request, $handler);
+        return $this->middleware->process($request, $handler);
     }
 
     /**
@@ -78,6 +80,10 @@ class Route implements RouteInterface
         return $this->methods;
     }
 
+    /**
+     * @param string $method
+     * @return bool
+     */
     public function allowsMethod(string $method): bool
     {
         return in_array($method, $this->methods);
