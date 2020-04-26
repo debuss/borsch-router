@@ -38,14 +38,32 @@ class Route implements RouteInterface
      * @param array $methods
      * @param string|null $name
      */
-    public function __construct(string $path, callable $middleware, ?array $methods, ?string $name = null)
+    public function __construct(string $path, $middleware, ?array $methods = null, ?string $name = null)
     {
         $this->path = $path;
         $this->middleware = $middleware instanceof MiddlewareInterface ?
             $middleware :
             new CallableMiddleware($middleware);
         $this->methods = $methods ?: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'HEAD', 'OPTIONS'];
-        $this->name = $name;
+        $this->name = $name ?: sprintf(
+            '%s^%s',
+            $this->path,
+            implode(':', $this->methods)
+        );
+    }
+
+    /**
+     * @param array $an_array
+     * @return RouteInterface
+     */
+    public static function __set_state(array $an_array): RouteInterface
+    {
+        return new Route(
+            $an_array['path'],
+            $an_array['middleware'],
+            $an_array['methods'],
+            $an_array['name']
+        );
     }
 
     /**

@@ -1,7 +1,7 @@
 {
   "name": "borsch/router",
   "description": "A routing library.",
-  "minimum-stability": "dev",
+  "minimum-stability": "stable",
   "license": "MIT",
   "authors": [
     {
@@ -12,7 +12,8 @@
   "require": {
     "psr/http-message": "1.0.1",
     "psr/http-server-middleware": "1.0.1",
-    "league/uri": "6.2.1"
+    "league/uri": "6.2.1",
+    "nikic/fast-route": "v1.3.0"
   },
   "require-dev": {
     "laminas/laminas-diactoros": "2.2.2"

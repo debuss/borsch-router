@@ -59,10 +59,9 @@ interface RouterInterface
      *
      * @param string $name
      * @param array $substitutions
-     * @param array $options
      * @return string
      * @see https://github.com/auraphp/Aura.Router/blob/3.x/docs/generating-paths.md
      * @see https://docs.laminas.dev/laminas-router/routing/
      */
-    public function generateUri(string $name, array $substitutions = [], array $options = []) : string;
+    public function generateUri(string $name, array $substitutions = []) : string;
 }

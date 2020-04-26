@@ -25,6 +25,16 @@ class CallableMiddleware implements MiddlewareInterface
         $this->callable = $callable;
     }
 
+    /**
+     * @param array $an_array
+     * @return CallableMiddleware
+     */
+    public static function __set_state(array $an_array): CallableMiddleware
+    {
+        return new CallableMiddleware(
+            $an_array['callable']
+        );
+    }
 
     /**
      * @inheritDoc

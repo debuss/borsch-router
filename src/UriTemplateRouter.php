@@ -5,28 +5,16 @@
 
 namespace Borsch\Router;
 
-use League\Uri\Contracts\UriException;
-use League\Uri\UriTemplate;
 use Psr\Http\Message\ServerRequestInterface;
 
 /**
  * Class UriTemplateRouter
+ * @package Borsch\Router
  */
-class UriTemplateRouter implements RouterInterface
+class UriTemplateRouter extends AbstractRouter
 {
 
     use HttpMethodTrait;
-
-    /** @var RouteInterface[]  */
-    protected $routes = [];
-
-    /**
-     * @inheritDoc
-     */
-    public function addRoute(RouteInterface $route): void
-    {
-        $this->routes[] = $route;
-    }
 
     /**
      * @inheritDoc
@@ -60,27 +48,5 @@ class UriTemplateRouter implements RouterInterface
         }
 
         return RouteResult::fromRouteFailure([]);
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function generateUri(string $name, array $substitutions = [], array $options = []): string
-    {
-        foreach ($this->routes as $route) {
-            if ($route->getName() == $name) {
-                $template = new UriTemplate($route->getPath());
-
-                try {
-                    $uri = $template->expand($substitutions);
-                } catch (UriException $exception) {
-                    $uri = '';
-                } finally {
-                    return (string)$uri;
-                }
-            }
-        }
-
-        return '';
     }
 }

@@ -9,22 +9,12 @@ use Psr\Http\Message\ServerRequestInterface;
 
 /**
  * Class BasePathRouter
+ * @package Borsch\Router
  */
-class BasePathRouter implements RouterInterface
+class BasePathRouter extends AbstractRouter
 {
 
     use HttpMethodTrait;
-
-    /** @var RouteInterface[]  */
-    protected $routes = [];
-
-    /**
-     * @inheritDoc
-     */
-    public function addRoute(RouteInterface $route): void
-    {
-        $this->routes[] = $route;
-    }
 
     /**
      * @inheritDoc
@@ -47,14 +37,12 @@ class BasePathRouter implements RouterInterface
     /**
      * @inheritDoc
      */
-    public function generateUri(string $name, array $substitutions = [], array $options = []): string
+    public function generateUri(string $name, array $substitutions = []): string
     {
-        foreach ($this->routes as $route) {
-            if ($route->getName() == $name) {
-                return $route->getPath();
-            }
+        if (!isset($this->routes[$name])) {
+            return '';
         }
 
-        return '';
+        return $this->routes[$name]->getPath();
     }
 }
