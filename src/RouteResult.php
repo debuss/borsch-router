@@ -55,7 +55,9 @@ class RouteResult implements RouteResultInterface
     {
         $result = new self();
         $result->success = false;
-        $result->methods = $methods ?: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'HEAD', 'OPTIONS'];
+        $result->methods = $methods !== null ?
+            $methods :
+            ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'HEAD', 'OPTIONS'];
 
         return $result;
     }

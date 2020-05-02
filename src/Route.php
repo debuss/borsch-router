@@ -34,7 +34,7 @@ class Route implements RouteInterface
     /**
      * Route constructor.
      * @param string $path
-     * @param callable $middleware
+     * @param callable|MiddlewareInterface $middleware
      * @param array $methods
      * @param string|null $name
      */
